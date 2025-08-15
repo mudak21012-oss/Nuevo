@@ -11,7 +11,7 @@ function corsHeaders() {
   return {
     'access-control-allow-origin': '*',
     'access-control-allow-methods': 'GET,OPTIONS',
-    'access-control-allow-headers': 'content-type'
+    'access-control-allow-headers': 'content-type, authorization, x-requested-with'
   };
 }
 
@@ -29,11 +29,15 @@ export default async function handler(req) {
     if (!ALLOWED_HOSTS.has(u.hostname)) {
       return new Response(JSON.stringify({ error: 'Host not allowed' }), { status: 400, headers: { 'content-type': 'application/json', ...corsHeaders() } });
     }
+    // Add cache-buster for upstream
+    u.searchParams.set('_', Date.now().toString());
     const upstream = await fetch(u.toString(), { cache: 'no-store' });
     const body = await upstream.arrayBuffer();
     const headers = new Headers(upstream.headers);
+    headers.set('cache-control', 'no-store, no-cache, must-revalidate');
+    headers.set('pragma', 'no-cache');
+    headers.set('expires', '0');
     headers.set('access-control-allow-origin', '*');
-    headers.set('cache-control', 's-maxage=60, stale-while-revalidate=300');
     return new Response(body, { status: upstream.status, headers });
   } catch (e) {
     return new Response(JSON.stringify({ error: String(e) }), { status: 500, headers: { 'content-type': 'application/json', ...corsHeaders() } });
