@@ -390,14 +390,18 @@
 
   <script>
     /* ========= Config ========= */
-    const CONFIG = {
-      FORCE_SOURCE: "csv",
-      SHEET_JSON_URL: "/api/proxy?url="+encodeURIComponent("https://script.google.com/.../exec")+"",
-      SHEET_CSV_URL: "/api/proxy?url="+encodeURIComponent("https://docs.google.com/spreadsheets/d/e/2PACX-1vTZ-GFIahnmzB09C1GWCvAs1PaNXmpN2_Ed5taWtseTRlqx0P8-ZKJ28TOsvziFOw/pub?gid=128232950&single=true&output=csv")+"",
-      TEMPORADA_CLASES: { inicio: "2025-02-15", fin: "2025-03-31" },
-      CACHE_TTL_MS: 0,
-      HEADER_ALIASES: {
-        id:["ID","uuid","Uid","id_producto"], marca:["Marca","brand","Brand","Fabricante"],
+   <script>
+  const CONFIG = {
+    FORCE_SOURCE: "csv",
+    SHEET_JSON_URL: "",
+    SHEET_CSV_URL:
+      "/api/proxy?url=" + encodeURIComponent(
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTZ-GFIahnmzB09C1GWCvAs1PaNXmpN2_Ed5taWtseTRlqx0P8-ZKJ28TOsvziFOw/pub?gid=128232950&single=true&output=csv"
+      ),
+    TEMPORADA_CLASES: { inicio: "2025-02-15", fin: "2025-03-31" },
+    CACHE_TTL_MS: 0,
+    HEADER_ALIASES: {
+      id:["ID","uuid","Uid","id_producto"], marca:["Marca","brand","Brand","Fabricante"],
         modelo:["Modelo","model","Model"], nombre:["Nombre","titulo","Título","producto","Producto"],
         tipo:["Tipo","tecnologia","Tecnología","technology","Tecnologia"],
         descripcion_corta:["descripcion","Descripción","descripcion breve","Descripción corta","resumen"],
