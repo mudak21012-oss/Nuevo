@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <title>Catálogo de Impresoras — HUB de comparación</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" href="data:;base64,=">
   <style>
     /* ========= TEMA OSCURO COMPACTO ========= */
     :root{
@@ -146,79 +147,79 @@
     }
     
     .cta-view {
-  flex: 1;
-  text-align: center;
-  padding: 12px 16px;
-  border-radius: 10px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  background: rgba(122, 162, 255, 0.1);
-  border: 1px solid rgba(122, 162, 255, 0.3);
-  color: #e6ecff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
+      flex: 1;
+      text-align: center;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      background: rgba(122, 162, 255, 0.1);
+      border: 1px solid rgba(122, 162, 255, 0.3);
+      color: #e6ecff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
 
-.cta-view::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(122, 162, 255, 0.2),
-    transparent
-  );
-  transition: 0.5s;
-  z-index: 0;
-}
+    .cta-view::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(122, 162, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+      z-index: 0;
+    }
 
-.cta-view:hover::before {
-  left: 100%;
-}
+    .cta-view:hover::before {
+      left: 100%;
+    }
 
-.cta-view::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(122, 162, 255, 0.15) 0%,
-    rgba(0, 255, 208, 0.1) 50%,
-    rgba(122, 162, 255, 0.15) 100%
-  );
-  z-index: 0;
-  border-radius: inherit;
-}
+    .cta-view::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(122, 162, 255, 0.15) 0%,
+        rgba(0, 255, 208, 0.1) 50%,
+        rgba(122, 162, 255, 0.15) 100%
+      );
+      z-index: 0;
+      border-radius: inherit;
+    }
 
-.cta-view span {
-  position: relative;
-  z-index: 1;
-  transition: transform 0.3s ease;
-}
+    .cta-view span {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
 
-.cta-view:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  border-color: rgba(122, 162, 255, 0.5);
-}
+    .cta-view:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      border-color: rgba(122, 162, 255, 0.5);
+    }
 
-.cta-view:hover span {
-  transform: scale(1.05);
-}
+    .cta-view:hover span {
+      transform: scale(1.05);
+    }
 
-.cta-view:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-}
+    .cta-view:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
     .cta-buy:hover, .cta-view:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0,0,0,.5);
@@ -389,6 +390,7 @@
   </template>
 
   <script>
+  // === CONFIG IMPRESORAS (usar SIEMPRE el proxy) ===
   const CONFIG = {
     FORCE_SOURCE: "csv",
     SHEET_JSON_URL: "",
@@ -400,351 +402,358 @@
     CACHE_TTL_MS: 0,
     HEADER_ALIASES: {
       id:["ID","uuid","Uid","id_producto"], marca:["Marca","brand","Brand","Fabricante"],
-        modelo:["Modelo","model","Model"], nombre:["Nombre","titulo","Título","producto","Producto"],
-        tipo:["Tipo","tecnologia","Tecnología","technology","Tecnologia"],
-        descripcion_corta:["descripcion","Descripción","descripcion breve","Descripción corta","resumen"],
-        caracteristicas:["caracteristicas","Características","features","especificaciones","atributos"],
-        imagenes:["imagenes","Imágenes","fotos","Fotos","images","image_urls","galeria","Galería","Imagen 1","Imagen1"],
-        precio:["Precio","price","Price","importe","valor","coste","costo"], moneda:["Moneda","currency","Currency"],
-        url_producto:["url","URL","enlace","link","Link","url producto","URL producto","producto_url"],
-        stock:["Stock","disponibilidad","availability","inventario","estado stock"],
-        uso_recomendado:["uso","Uso","segmento","Uso recomendado","target"],
-        sugerencia_compra:["sugerencia","Sugerencia compra","recomendacion","Recomendación"],
-        ultima_actualizacion:["Última actualización","actualizado","update_date","last_update","fecha actualización"],
-      },
+      modelo:["Modelo","model","Model"], nombre:["Nombre","titulo","Título","producto","Producto"],
+      tipo:["Tipo","tecnologia","Tecnología","technology","Tecnologia"],
+      descripcion_corta:["descripcion","Descripción","descripcion breve","Descripción corta","resumen"],
+      caracteristicas:["caracteristicas","Características","features","especificaciones","atributos"],
+      imagenes:["imagenes","Imágenes","fotos","Fotos","images","image_urls","galeria","Galería","Imagen 1","Imagen1"],
+      precio:["Precio","price","Price","importe","valor","coste","costo"], moneda:["Moneda","currency","Currency"],
+      url_producto:["url","URL","enlace","link","Link","url producto","URL producto","producto_url"],
+      stock:["Stock","disponibilidad","availability","inventario","estado stock"],
+      uso_recomendado:["uso","Uso","segmento","Uso recomendado","target"],
+      sugerencia_compra:["sugerencia","Sugerencia compra","recomendacion","Recomendación"],
+      ultima_actualizacion:["Última actualización","actualizado","update_date","last_update","fecha actualización"]
+    }
+  };
+  const CACHE_KEY = "impresorasCache:hub:v6";
+  const MAX_IMAGES_PER_CARD = 6;
+  const MAX_COMPARE_TOTAL = 4; // 1 principal + 3
+  const MAX_QUICKLIST = 250;
+
+  /* ========= Estado ========= */
+  const state = { items:[], medianaPorGrupo:{}, search:"", selectedId:"", compareIds:[], hubSearch:"" };
+
+  /* ========= Utils ========= */
+  const $=(s,r=document)=>r.querySelector(s);
+  const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  const withinDateRange=(_d,r)=>{const t=new Date(),s=new Date(r.inicio+"T00:00:00"),e=new Date(r.fin+"T23:59:59");return t>=s&&t<=e;};
+  function parsePrice(v){if(v==null||v==="")return null;const s=String(v).trim().replace(/\s+/g,"").replace(/(?<=\d)[.,](?=\d{3}\b)/g,"").replace(",",".");const n=Number(s);return Number.isFinite(n)?n:null;}
+  function formatPrice(n,c){if(n==null)return"";try{if(c)return new Intl.NumberFormat(undefined,{style:"currency",currency:c}).format(n);}catch(_){ }return new Intl.NumberFormat(undefined).format(n)+(c?` ${c}`:"");}
+  function parseCSVToObjects(txt){const rows=[];let i=0,field="",row=[],q=false;const endF=()=>{row.push(field);field="";},endR=()=>{rows.push(row);row=[];};while(i<txt.length){const c=txt[i];if(q){if(c=='"'){if(txt[i+1]=='"'){field+='"';i++;}else q=false;}else field+=c;}else{if(c=='"')q=true;else if(c==",")endF();else if(c=="\n"){endF();endR();}else if(c!="\r")field+=c;}i++;}endF();endR();const headers=rows.shift()?.map(h=>(h||"").trim())||[];return rows.filter(r=>r.some(v=>(v||"").trim()!=="")).map(r=>{const o={};headers.forEach((h,idx)=>o[h]=(r[idx]??"").trim());return o;});}
+  const initials=(a,b="")=>{const p=[a,b].filter(Boolean).join(" ").split(/\s+/).filter(Boolean);return (p[0]?.[0]||"P").toUpperCase()+(p[1]?.[0]||"R").toUpperCase();};
+  const placeholderDataURI=(t="PR")=>"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200"><rect width="100%" height="100%" rx="44" ry="44" fill="#101826"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-size="200" fill="#6b7280" font-weight="700">${t}</text></svg>`);
+  const escapeHTML=s=>s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
+  const _normKey=s=>String(s||"").normalize?.("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"").trim();
+  const _buildHeaderIndex=r=>{const i={};Object.keys(r||{}).forEach(k=>i[_normKey(k)]=k);return i;};
+  const _makeReader=idx=>(row,want)=>{const c=[want,...(CONFIG.HEADER_ALIASES?.[want]||[])];for(const w of c){const real=idx[_normKey(w)];if(real&&row[real]!=null&&String(row[real]).trim()!=="")return String(row[real]).trim();}return "";};
+  function _extractImages(row,idx){const d=_makeReader(idx)(row,"imagenes");if(d)return d;const imgs=[];for(const k of Object.keys(row)){const nk=_normKey(k);if(nk.startsWith("imagen")||nk.startsWith("foto")||nk.startsWith("image")){const v=String(row[k]??"").trim();if(v)imgs.push(v);}}return imgs.join(", ");}
+  function _extractFeatures(row,idx){const d=_makeReader(idx)(row,"caracteristicas");if(d)return d;const fs=[];for(const k of Object.keys(row)){const nk=_normKey(k);if(nk.startsWith("caracteristica")||nk.startsWith("feature")||nk==="caracteristicas"){const v=String(row[k]??"").trim();if(v)fs.push(v);} }return fs.join("|");}
+  const _normalizeStock=s=>{const v=String(s||"").toLowerCase();if(!v)return"";if(/(sin\s*stock|agotad|no\s*disponible)/.test(v))return"sin_stock";if(/(bajo|poco)/.test(v))return"bajo";if(/(pedido|order)/.test(v))return"bajo_pedido";if(/(en\s*stock|disponible|stock)/.test(v))return"en_stock";return v;};
+  function remapRowsWithAliases(rows){if(!rows||!rows.length)return rows;const idx=_buildHeaderIndex(rows[0]),read=_makeReader(idx);
+    return rows.map(r=>({...r,
+      id:read(r,"id")||r.id,marca:read(r,"marca")||r.marca,modelo:read(r,"modelo")||r.modelo,
+      nombre:read(r,"nombre")||r.nombre,tipo:read(r,"tipo")||r.tipo,descripcion_corta:read(r,"descripcion_corta")||r.descripcion_corta,
+      caracteristicas:_extractFeatures(r,idx),imagenes:_extractImages(r,idx),precio:read(r,"precio")||r.precio,moneda:read(r,"moneda")||r.moneda,
+      url_producto:read(r,"url_producto")||r.url_producto||read(r,"url")||"",stock:_normalizeStock(read(r,"stock")||r.stock),
+      uso_recomendado:read(r,"uso_recomendado")||r.uso_recomendado,sugerencia_compra:read(r,"sugerencia_compra")||r.sugerencia_compra,ultima_actualizacion:read(r,"ultima_actualizacion")||r.ultima_actualizacion
+    }));}
+
+  /* ========= Fetch + cache ========= */
+  async function tryFetchJSON(url){if(!url||url.includes(".../exec"))throw new Error("JSON URL placeholder");const r=await fetch(url,{headers:{"Accept":"application/json"}});if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();const rows=Array.isArray(d)?d:(Array.isArray(d.data)?d.data:[]);if(!rows.length)throw new Error("JSON vacío");return rows;}
+  async function tryFetchCSV(url){
+    if(!url) throw new Error("URL CSV vacía");
+    const bust=url+(url.includes("?")?"&":"?")+"_cb="+Date.now();
+    const r=await fetch(bust,{ cache:"no-store", headers:{"Accept":"text/csv"}});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    let t=await r.text();
+    if(/<\s*html/i.test(t)) throw new Error("La URL devolvió HTML. Publicar como CSV/TSV");
+    t=t.replace(/^\uFEFF/, '').replace(/\r\n/g,'\n');
+    const rows=parseCSVToObjects(t);
+    if(!rows.length) throw new Error("CSV vacío");
+    return rows;
+  }
+  const saveCache=items=>{try{localStorage.setItem(CACHE_KEY,JSON.stringify({ts:Date.now(),items}))}catch(_){ }};
+  function loadCache(){try{const raw=localStorage.getItem(CACHE_KEY);if(!raw)return null;const p=JSON.parse(raw);if(!p||!Array.isArray(p.items))return null;if(Date.now()-p.ts>CONFIG.CACHE_TTL_MS)return null;return p.items;}catch(_){return null;}}
+  async function loadDataWithFallback(){
+    const st=$("#status"); st.textContent="Cargando…";
+    const c=loadCache(); if(c){st.textContent=`Cache (${c.length})`; return c;}
+    try{
+      if(CONFIG.FORCE_SOURCE==="json"){const j=await tryFetchJSON(CONFIG.SHEET_JSON_URL);st.textContent=`JSON (${j.length})`;saveCache(j);return j;}
+      if(CONFIG.FORCE_SOURCE==="csv"){const v=await tryFetchCSV(CONFIG.SHEET_CSV_URL);st.textContent=`CSV (${v.length})`;saveCache(v);return v;}
+      try{const j=await tryFetchJSON(CONFIG.SHEET_JSON_URL);st.textContent=`JSON (${j.length})`;saveCache(j);return j;}catch(e){st.textContent=`JSON falló → CSV…`;const v=await tryFetchCSV(CONFIG.SHEET_CSV_URL);st.textContent=`CSV (${v.length})`;saveCache(v);return v;}
+    }catch(e){st.textContent=`Fallo fuentes. Demo local.`;return SAMPLE_DATA;}
+  }
+
+  /* ========= Transformación + sugerencias ========= */
+  function normalizeRow(row){
+    const it={...row};
+    it.marca=(it.marca||"").trim(); it.modelo=(it.modelo||"").trim();
+    it.nombre=(it.nombre||"").trim()||`${it.marca} ${it.modelo}`.trim();
+    it.tipo=(it.tipo||"").trim(); it.descripcion_corta=(it.descripcion_corta||"").trim();
+    it._features=(it.caracteristicas||"").split("|").map(x=>x.trim()).filter(Boolean);
+    let imgs=(it.imagenes||"").split(",").map(x=>x.trim()).filter(Boolean);
+    if(imgs.length>MAX_IMAGES_PER_CARD) imgs=imgs.slice(0,MAX_IMAGES_PER_CARD);
+    if(!imgs.length) imgs=[placeholderDataURI(initials(it.marca,it.modelo))];
+    it._images=imgs;
+    it._precio=parsePrice(it.precio); it.moneda=(it.moneda||"").trim().toUpperCase();
+    it.url_producto=(it.url_producto||"").trim(); it.stock=(it.stock||"").trim();
+    it.uso_recomendado=(it.uso_recomendado||"").trim(); it.sugerencia_compra=(it.sugerencia_compra||"").trim();
+    it.ultima_actualizacion=(it.ultima_actualizacion||"").trim();
+    it.id=(it.id||`${it.marca}-${it.modelo}`||Math.random().toString(36).slice(2)).trim();
+    return it;
+  }
+  const computeMedian=arr=>{if(!arr.length)return null;const a=arr.slice().sort((x,y)=>x-y);const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;};
+  function buildMedians(items){const g=new Map();for(const it of items){if(it._precio==null)continue;const k=`${it.marca}|${it.tipo}`;if(!g.has(k))g.set(k,[]);g.get(k).push(it._precio);}const out={};for(const [k,v]of g)out[k]=computeMedian(v);return out;}
+  function computeSuggestion(it,med){
+    if(it.sugerencia_compra) return {text:it.sugerencia_compra, source:"Hoja"};
+    if(it.stock==="bajo") return {text:"Comprar pronto: stock limitado", source:"stock=bajo"};
+    if(it.stock==="sin_stock") return {text:"Esperar reposición", source:"stock=sin_stock"};
+    const key=`${it.marca}|${it.tipo}`, m=med[key];
+    if(it._precio!=null && m!=null && it._precio<m) return {text:"Buen momento para comprar", source:"precio < mediana"};
+    if(it.uso_recomendado==="estudiante" && withinDateRange(new Date(), CONFIG.TEMPORADA_CLASES)) return {text:"Comprar antes de inicio de clases", source:"temporada estudiantes"};
+    return {text:"Comprar según necesidad", source:"sin condición específica"};
+  }
+  function transformAll(rows){
+    const canon=remapRowsWithAliases(rows);
+    const items=canon.map(normalizeRow);
+    const med=buildMedians(items);
+    for(const it of items){const s=computeSuggestion(it,med);it._sugerencia=s.text;it._sugerencia_source="Regla: "+s.source;}
+    return {items,medians:med};
+  }
+
+  /* ========= Filtros + render ========= */
+  function filteredItems(){
+    const q=(state.search||"").toLowerCase().trim();
+    let out=state.items.filter(it=>{
+      if(!q) return true;
+      const hay=[it.marca,it.modelo,it.nombre,it.tipo,it.descripcion_corta,it._features.join(" ")].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+    out.sort((a,b)=>a.nombre.localeCompare(b.nombre,undefined,{sensitivity:"base"}));
+    return out;
+  }
+
+  function renderQuickList(){
+    const ul=$("#quickList"); ul.innerHTML="";
+    const items=filteredItems().slice(0,MAX_QUICKLIST);
+    const frag=document.createDocumentFragment();
+    for(const it of items){
+      const li=document.createElement("li"); li.setAttribute("role","button"); li.tabIndex=0; li.dataset.id=it.id;
+      if(it.id===state.selectedId) li.setAttribute("aria-current","true");
+      
+      // Miniatura con una sola imagen
+      const thumb = document.createElement("div");
+      thumb.className = "thumbnail";
+      const img = document.createElement("img");
+      img.src = it._images[0]; // primera imagen
+      img.alt = "";
+      thumb.appendChild(img);
+      
+      li.innerHTML += `<div>
+          <div class="name">${escapeHTML(it.nombre)}</div>
+          <div class="chips"><span class="chip">${escapeHTML(it.marca)}</span><span class="chip">${escapeHTML(it.tipo||"")||"—"}</span></div>
+        </div>
+        <div class="price">${it._precio!=null?escapeHTML(formatPrice(it._precio,it.moneda)):""}</div>`;
+        
+      // Asegurar que la miniatura se añade correctamente
+      li.insertBefore(thumb, li.firstChild);
+      
+      li.addEventListener("click", ()=>{ state.selectedId=it.id; renderPrimary(); highlightQuickList(); });
+      li.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); state.selectedId=it.id; renderPrimary(); highlightQuickList(); }});
+      frag.appendChild(li);
+    }
+    if(!items.length){ const li=document.createElement("li"); li.innerHTML='<span class="chips">Sin resultados</span>'; frag.appendChild(li); }
+    ul.appendChild(frag);
+    $("#status").textContent=`Resultados: ${items.length} · Total: ${state.items.length}`;
+    if(!state.selectedId && items[0]){ state.selectedId=items[0].id; renderPrimary(); highlightQuickList(); }
+  }
+  function highlightQuickList(){ $$("#quickList li").forEach(li=>li.removeAttribute("aria-current")); const cur=$(`#quickList li[data-id="${CSS.escape(state.selectedId)}"]`); if(cur) cur.setAttribute("aria-current","true"); }
+
+  function renderPrimary(){
+    const c=$("#primaryContainer"); c.innerHTML="";
+    const it=state.items.find(x=>x.id===state.selectedId);
+    if(!it){ c.innerHTML='<div class="chips">Selecciona una impresora.</div>'; return; }
+    const node=renderCard(it);
+    c.appendChild(node);
+  }
+
+  function renderCard(item){
+    const tpl=$("#tpl-card"); const el=tpl.content.firstElementChild.cloneNode(true);
+
+    // === Carrusel (slice) ===
+    const stage=el.querySelector(".stage");
+    const imgBottom=el.querySelector(".img-bottom");
+    const prev=el.querySelector(".prev"), next=el.querySelector(".next");
+    const ind=el.querySelector(".indicator");
+    const images=item._images.slice(0,MAX_IMAGES_PER_CARD);
+    let idx=0;
+    const setIndicator=()=> ind.textContent=`${idx+1}/${images.length}`;
+    const setImg=(t,src,alt)=>{ t.src=src; t.alt=alt; };
+    const show=(index)=>{ idx=(index+images.length)%images.length;
+      const src=images[idx]; const alt=`Foto ${idx+1}/${images.length} — ${item.nombre}`;
+      setImg(imgBottom,src,alt); setIndicator();
     };
-    const CACHE_KEY = "impresorasCache:hub:v6";
-    const MAX_IMAGES_PER_CARD = 6;
-    const MAX_COMPARE_TOTAL = 4; // 1 principal + 3
-    const MAX_QUICKLIST = 250;
+    setImg(imgBottom, images[0], `Foto 1/${images.length} — ${item.nombre}`); setIndicator();
+    prev.addEventListener("click", ()=>show(idx-1)); next.addEventListener("click", ()=>show(idx+1));
+    stage.parentElement.addEventListener("keydown",e=>{ if(e.key==="ArrowLeft"){e.preventDefault();show(idx-1);} if(e.key==="ArrowRight"){e.preventDefault();show(idx+1);} });
 
-    /* ========= Estado ========= */
-    const state = { items:[], medianaPorGrupo:{}, search:"", selectedId:"", compareIds:[], hubSearch:"" };
+    // Chips debajo de la foto
+    el.querySelector(".brand").textContent=item.marca||"—";
+    el.querySelector(".type").textContent=item.tipo||"—";
+    el.querySelector(".stock").textContent=({en_stock:"En stock",bajo:"Stock bajo",sin_stock:"Sin stock",bajo_pedido:"Bajo pedido"}[item.stock]||item.stock||"—");
+    el.querySelector(".price").textContent=item._precio!=null?formatPrice(item._precio,item.moneda):"";
 
-    /* ========= Utils ========= */
-    const $=(s,r=document)=>r.querySelector(s);
-    const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
-    const withinDateRange=(_d,r)=>{const t=new Date(),s=new Date(r.inicio+"T00:00:00"),e=new Date(r.fin+"T23:59:59");return t>=s&&t<=e;};
-    function parsePrice(v){if(v==null||v==="")return null;const s=String(v).trim().replace(/\s+/g,"").replace(/(?<=\d)[.,](?=\d{3}\b)/g,"").replace(",",".");const n=Number(s);return Number.isFinite(n)?n:null;}
-    function formatPrice(n,c){if(n==null)return"";try{if(c)return new Intl.NumberFormat(undefined,{style:"currency",currency:c}).format(n);}catch(_){ }return new Intl.NumberFormat(undefined).format(n)+(c?` ${c}`:"");}
-    function parseCSVToObjects(txt){const rows=[];let i=0,field="",row=[],q=false;const endF=()=>{row.push(field);field="";},endR=()=>{rows.push(row);row=[];};while(i<txt.length){const c=txt[i];if(q){if(c=='"'){if(txt[i+1]=='"'){field+='"';i++;}else q=false;}else field+=c;}else{if(c=='"')q=true;else if(c==",")endF();else if(c=="\n"){endF();endR();}else if(c!="\r")field+=c;}i++;}endF();endR();const headers=rows.shift()?.map(h=>(h||"").trim())||[];return rows.filter(r=>r.some(v=>(v||"").trim()!=="")).map(r=>{const o={};headers.forEach((h,idx)=>o[h]=(r[idx]??"").trim());return o;});}
-    const initials=(a,b="")=>{const p=[a,b].filter(Boolean).join(" ").split(/\s+/).filter(Boolean);return (p[0]?.[0]||"P").toUpperCase()+(p[1]?.[0]||"R").toUpperCase();};
-    const placeholderDataURI=(t="PR")=>"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200"><rect width="100%" height="100%" rx="44" ry="44" fill="#101826"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-size="200" fill="#6b7280" font-weight="700">${t}</text></svg>`);
-    const escapeHTML=s=>s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
-    const _normKey=s=>String(s||"").normalize?.("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"").trim();
-    const _buildHeaderIndex=r=>{const i={};Object.keys(r||{}).forEach(k=>i[_normKey(k)]=k);return i;};
-    const _makeReader=idx=>(row,want)=>{const c=[want,...(CONFIG.HEADER_ALIASES?.[want]||[])];for(const w of c){const real=idx[_normKey(w)];if(real&&row[real]!=null&&String(row[real]).trim()!=="")return String(row[real]).trim();}return "";};
-    function _extractImages(row,idx){const d=_makeReader(idx)(row,"imagenes");if(d)return d;const imgs=[];for(const k of Object.keys(row)){const nk=_normKey(k);if(nk.startsWith("imagen")||nk.startsWith("foto")||nk.startsWith("image")){const v=String(row[k]??"").trim();if(v)imgs.push(v);}}return imgs.join(", ");}
-    function _extractFeatures(row,idx){const d=_makeReader(idx)(row,"caracteristicas");if(d)return d;const fs=[];for(const k of Object.keys(row)){const nk=_normKey(k);if(nk.startsWith("caracteristica")||nk.startsWith("feature")||nk==="caracteristicas"){const v=String(row[k]??"").trim();if(v)fs.push(v);} }return fs.join("|");}
-    const _normalizeStock=s=>{const v=String(s||"").toLowerCase();if(!v)return"";if(/(sin\s*stock|agotad|no\s*disponible)/.test(v))return"sin_stock";if(/(bajo|poco)/.test(v))return"bajo";if(/(pedido|order)/.test(v))return"bajo_pedido";if(/(en\s*stock|disponible|stock)/.test(v))return"en_stock";return v;};
-    function remapRowsWithAliases(rows){if(!rows||!rows.length)return rows;const idx=_buildHeaderIndex(rows[0]),read=_makeReader(idx);
-      return rows.map(r=>({...r,
-        id:read(r,"id")||r.id,marca:read(r,"marca")||r.marca,modelo:read(r,"modelo")||r.modelo,
-        nombre:read(r,"nombre")||r.nombre,tipo:read(r,"tipo")||r.tipo,descripcion_corta:read(r,"descripcion_corta")||r.descripcion_corta,
-        caracteristicas:_extractFeatures(r,idx),imagenes:_extractImages(r,idx),precio:read(r,"precio")||r.precio,moneda:read(r,"moneda")||r.moneda,
-        url_producto:read(r,"url_producto")||r.url_producto||read(r,"url")||"",stock:_normalizeStock(read(r,"stock")||r.stock),
-        uso_recomendado:read(r,"uso_recomendado")||r.uso_recomendado,sugerencia_compra:read(r,"sugerencia_compra")||r.sugerencia_compra,ultima_actualizacion:read(r,"ultima_actualizacion")||r.ultima_actualizacion
-      }));}
-
-    /* ========= Fetch + cache ========= */
-    async function tryFetchJSON(url){if(!url||url.includes(".../exec"))throw new Error("JSON URL placeholder");const r=await fetch(url,{headers:{"Accept":"application/json"}});if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();const rows=Array.isArray(d)?d:(Array.isArray(d.data)?d.data:[]);if(!rows.length)throw new Error("JSON vacío");return rows;}
-    async function tryFetchCSV(url){const bust=url+(url.includes("?")?"&":"?")+"_cb="+Date.now();const r=await fetch(bust,{headers:{"Accept":"text/csv"}});if(!r.ok)throw new Error("HTTP "+r.status);const t=await r.text();const rows=parseCSVToObjects(t);if(!rows.length)throw new Error("CSV vacío");return rows;}
-    const saveCache=items=>{try{localStorage.setItem(CACHE_KEY,JSON.stringify({ts:Date.now(),items}))}catch(_){ }};
-    function loadCache(){try{const raw=localStorage.getItem(CACHE_KEY);if(!raw)return null;const p=JSON.parse(raw);if(!p||!Array.isArray(p.items))return null;if(Date.now()-p.ts>CONFIG.CACHE_TTL_MS)return null;return p.items;}catch(_){return null;}}
-    async function loadDataWithFallback(){
-      const st=$("#status"); st.textContent="Cargando…";
-      const c=loadCache(); if(c){st.textContent=`Cache (${c.length})`; return c;}
-      try{
-        if(CONFIG.FORCE_SOURCE==="json"){const j=await tryFetchJSON(CONFIG.SHEET_JSON_URL);st.textContent=`JSON (${j.length})`;saveCache(j);return j;}
-        if(CONFIG.FORCE_SOURCE==="csv"){const v=await tryFetchCSV(CONFIG.SHEET_CSV_URL);st.textContent=`CSV (${v.length})`;saveCache(v);return v;}
-        try{const j=await tryFetchJSON(CONFIG.SHEET_JSON_URL);st.textContent=`JSON (${j.length})`;saveCache(j);return j;}catch(e){st.textContent=`JSON falló → CSV…`;const v=await tryFetchCSV(CONFIG.SHEET_CSV_URL);st.textContent=`CSV (${v.length})`;saveCache(v);return v;}
-      }catch(e){st.textContent=`Fallo fuentes. Demo local.`;return SAMPLE_DATA;}
+    // Nuevos botones CTA en panel de información
+    const linkBuy = el.querySelector(".cta-buy");
+    const linkView = el.querySelector(".cta-view");
+    if(item.url_producto){ 
+      linkBuy.href=item.url_producto; 
+      linkView.href=item.url_producto; 
+    } else { 
+      linkBuy.href="javascript:void(0)"; 
+      linkView.href="javascript:void(0)"; 
+      linkBuy.classList.add("disabled");
+      linkView.classList.add("disabled");
     }
 
-    /* ========= Transformación + sugerencias ========= */
-    function normalizeRow(row){
-      const it={...row};
-      it.marca=(it.marca||"").trim(); it.modelo=(it.modelo||"").trim();
-      it.nombre=(it.nombre||"").trim()||`${it.marca} ${it.modelo}`.trim();
-      it.tipo=(it.tipo||"").trim(); it.descripcion_corta=(it.descripcion_corta||"").trim();
-      it._features=(it.caracteristicas||"").split("|").map(x=>x.trim()).filter(Boolean);
-      let imgs=(it.imagenes||"").split(",").map(x=>x.trim()).filter(Boolean);
-      if(imgs.length>MAX_IMAGES_PER_CARD) imgs=imgs.slice(0,MAX_IMAGES_PER_CARD);
-      if(!imgs.length) imgs=[placeholderDataURI(initials(it.marca,it.modelo))];
-      it._images=imgs;
-      it._precio=parsePrice(it.precio); it.moneda=(it.moneda||"").trim().toUpperCase();
-      it.url_producto=(it.url_producto||"").trim(); it.stock=(it.stock||"").trim();
-      it.uso_recomendado=(it.uso_recomendado||"").trim(); it.sugerencia_compra=(it.sugerencia_compra||"").trim();
-      it.ultima_actualizacion=(it.ultima_actualizacion||"").trim();
-      it.id=(it.id||`${it.marca}-${it.modelo}`||Math.random().toString(36).slice(2)).trim();
-      return it;
-    }
-    const computeMedian=arr=>{if(!arr.length)return null;const a=arr.slice().sort((x,y)=>x-y);const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;};
-    function buildMedians(items){const g=new Map();for(const it of items){if(it._precio==null)continue;const k=`${it.marca}|${it.tipo}`;if(!g.has(k))g.set(k,[]);g.get(k).push(it._precio);}const out={};for(const [k,v]of g)out[k]=computeMedian(v);return out;}
-    function computeSuggestion(it,med){
-      if(it.sugerencia_compra) return {text:it.sugerencia_compra, source:"Hoja"};
-      if(it.stock==="bajo") return {text:"Comprar pronto: stock limitado", source:"stock=bajo"};
-      if(it.stock==="sin_stock") return {text:"Esperar reposición", source:"stock=sin_stock"};
-      const key=`${it.marca}|${it.tipo}`, m=med[key];
-      if(it._precio!=null && m!=null && it._precio<m) return {text:"Buen momento para comprar", source:"precio < mediana"};
-      if(it.uso_recomendado==="estudiante" && withinDateRange(new Date(), CONFIG.TEMPORADA_CLASES)) return {text:"Comprar antes de inicio de clases", source:"temporada estudiantes"};
-      return {text:"Comprar según necesidad", source:"sin condición específica"};
-    }
-    function transformAll(rows){
-      const canon=remapRowsWithAliases(rows);
-      const items=canon.map(normalizeRow);
-      const med=buildMedians(items);
-      for(const it of items){const s=computeSuggestion(it,med);it._sugerencia=s.text;it._sugerencia_source="Regla: "+s.source;}
-      return {items,medians:med};
-    }
+    // Datos + features + fecha al final del panel de información
+    el.querySelector(".name").textContent=item.nombre;
+    el.querySelector(".desc").textContent=item.descripcion_corta||"";
+    const feats=el.querySelector(".features"); feats.innerHTML=""; for(const f of item._features){ const li=document.createElement("li"); li.textContent=f; feats.appendChild(li); }
+    el.querySelector(".updated-date").textContent=item.ultima_actualizacion||"—";
+    const sug=el.querySelector(".suggestion"); sug.querySelector(".suggestion-text").textContent=item._sugerencia; sug.querySelector(".suggestion-source").textContent=item._sugerencia_source; sug.title=item._sugerencia_source;
 
-    /* ========= Filtros + render ========= */
-    function filteredItems(){
-      const q=(state.search||"").toLowerCase().trim();
-      let out=state.items.filter(it=>{
-        if(!q) return true;
-        const hay=[it.marca,it.modelo,it.nombre,it.tipo,it.descripcion_corta,it._features.join(" ")].join(" ").toLowerCase();
-        return hay.includes(q);
+    // Botón comparar
+    const compareBtn = el.querySelector(".btn-compare");
+    compareBtn.addEventListener("click", () => openCompareHub());
+
+    return el;
+  }
+
+  /* ========= HUB de comparación ========= */
+  function openCompareHub(){
+    const hub=$("#compareHub"); hub.hidden=false; document.body.style.overflow="hidden";
+    $("#hubSearch").value = state.hubSearch || "";
+    renderHub();
+    setTimeout(()=>$("#hubSearch").focus(),0);
+  }
+  function closeCompareHub(){ $("#compareHub").hidden=true; document.body.style.overflow=""; }
+  function removeFromCompare(id){ state.compareIds = state.compareIds.filter(x=>x!==id); renderHub(); }
+
+  function renderHub(){
+    const q = ($("#hubSearch").value || "").toLowerCase().trim();
+    state.hubSearch = q;
+    const list = $("#hubList"); list.innerHTML="";
+    const items = state.items.filter(it=>{
+      if(!q) return true;
+      const hay=[it.marca,it.modelo,it.nombre,it.tipo,it._features.join(" ")].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+    const frag=document.createDocumentFragment();
+    for(const it of items){
+      const row=document.createElement("label"); row.className="hub__item"; row.tabIndex=0;
+      const cb=document.createElement("input"); cb.type="checkbox"; cb.value=it.id;
+      const isPrimary = it.id===state.selectedId;
+      cb.checked = isPrimary ? true : state.compareIds.includes(it.id);
+      cb.disabled = isPrimary;
+      cb.addEventListener("change", ()=>{
+        if(cb.checked){ if(!isPrimary){ if(state.compareIds.length >= Math.max(0, MAX_COMPARE_TOTAL-1)){ cb.checked=false; return; } state.compareIds.push(it.id);} }
+        else { state.compareIds = state.compareIds.filter(x=>x!==it.id); }
+        renderHubMain(); updateHubCount();
       });
-      out.sort((a,b)=>a.nombre.localeCompare(b.nombre,undefined,{sensitivity:"base"}));
-      return out;
+      row.addEventListener("keydown", (e)=>{ if(e.key===" "){ e.preventDefault(); cb.click(); }});
+      const name=document.createElement("span");
+      name.innerHTML = `<strong>${escapeHTML(it.nombre)}</strong> <span class="chip">${escapeHTML(it.marca)}</span>${isPrimary? ' <span class="chip">Seleccionada</span>':''}`;
+      row.appendChild(cb); row.appendChild(name);
+      frag.appendChild(row);
     }
+    if(!items.length){ const empty=document.createElement("div"); empty.className="hub__item"; empty.innerHTML='<span class="chip">Sin resultados</span>'; frag.appendChild(empty); }
+    list.appendChild(frag);
+    updateHubCount(); renderHubMain();
+  }
+  function renderHubMain(){
+    const wrap=$("#hubTableWrap"); wrap.innerHTML="";
+    const primary=state.items.find(x=>x.id===state.selectedId); if(!primary){ wrap.innerHTML='<div class="pill">Selecciona primero una impresora.</div>'; return; }
+    const cols=[primary, ...state.compareIds.map(id=>state.items.find(x=>x.id===id)).filter(Boolean)];
+    wrap.appendChild(buildCompareTable(cols));
+  }
+  function updateHubCount(){ $("#hubCount").textContent = `${state.compareIds.length} seleccionados (máx. ${Math.max(0, MAX_COMPARE_TOTAL-1)} además del principal)`; }
 
-    function renderQuickList(){
-      const ul=$("#quickList"); ul.innerHTML="";
-      const items=filteredItems().slice(0,MAX_QUICKLIST);
-      const frag=document.createDocumentFragment();
-      for(const it of items){
-        const li=document.createElement("li"); li.setAttribute("role","button"); li.tabIndex=0; li.dataset.id=it.id;
-        if(it.id===state.selectedId) li.setAttribute("aria-current","true");
-        
-        // Miniatura con una sola imagen
-        const thumb = document.createElement("div");
-        thumb.className = "thumbnail";
-        const img = document.createElement("img");
-        img.src = it._images[0]; // primera imagen
-        img.alt = "";
-        thumb.appendChild(img);
-        
-        li.innerHTML += `<div>
-            <div class="name">${escapeHTML(it.nombre)}</div>
-            <div class="chips"><span class="chip">${escapeHTML(it.marca)}</span><span class="chip">${escapeHTML(it.tipo||"")||"—"}</span></div>
-          </div>
-          <div class="price">${it._precio!=null?escapeHTML(formatPrice(it._precio,it.moneda)):""}</div>`;
-          
-        // Asegurar que la miniatura se añade correctamente
-        li.insertBefore(thumb, li.firstChild);
-        
-        li.addEventListener("click", ()=>{ state.selectedId=it.id; renderPrimary(); highlightQuickList(); });
-        li.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); state.selectedId=it.id; renderPrimary(); highlightQuickList(); }});
-        frag.appendChild(li);
+  function buildCompareTable(items){
+    const t=document.createElement("table"); t.className="compare";
+    const colg=document.createElement("colgroup"); const c0=document.createElement("col"); c0.className="sticky-col"; colg.appendChild(c0);
+    for(let i=0;i<items.length;i++){ const c=document.createElement("col"); c.className="data-col"; colg.appendChild(c); }
+    t.appendChild(colg);
+
+    const thead=t.createTHead(); const hrow=thead.insertRow();
+    const h0=document.createElement("th"); h0.className="sticky"; h0.textContent="Especificación"; hrow.appendChild(h0);
+
+    items.forEach((it,idx)=>{
+      const th=document.createElement("th");
+      if(idx===0) th.classList.add("is-primary-col");
+      th.innerHTML=`<div style="display:grid;gap:6px;align-content:start">
+        <div><strong>${escapeHTML(it.nombre)}</strong></div>
+        <div style="color:var(--muted)">${escapeHTML(it.marca)} ${escapeHTML(it.modelo)}</div>
+        <div style="white-space:nowrap;margin-top:.2rem;display:flex;gap:6px;flex-wrap:wrap">
+          ${it.url_producto?`<a class="btn-cta" href="${it.url_producto}" target="_blank" rel="noopener">Comprar / Ver ficha →</a>`:`<span class="chip">Sin enlace</span>`}
+          ${idx!==0?`<button class="btn btn-ghost remove-col" data-id="${it.id}" type="button">Quitar</button>`:`<span class="chip">Principal</span>`}
+        </div></div>`;
+      hrow.appendChild(th);
+    });
+
+    const tb=t.createTBody();
+    const add=(label,get)=>{const tr=tb.insertRow();const th=document.createElement("th");th.className="sticky";th.textContent=label;tr.appendChild(th);
+      items.forEach((it,idx)=>{const td=tr.insertCell(); td.innerHTML=get(it)??"—"; if(idx===0) td.classList.add("is-primary-col");});
+    };
+    items.forEach(it=>{it._precioFmt=it._precio!=null?formatPrice(it._precio,it.moneda):"—";});
+    add("Nombre", it=>escapeHTML(it.nombre));
+    add("Marca", it=>escapeHTML(it.marca));
+    add("Modelo", it=>escapeHTML(it.modelo));
+    add("Tipo", it=>escapeHTML(it.tipo||"—"));
+    add("Precio", it=>escapeHTML(it._precioFmt));
+    add("Stock", it=>escapeHTML(it.stock||"—"));
+    add("Uso recomendado", it=>escapeHTML(it.uso_recomendado||"—"));
+    add("Sugerencia", it=>escapeHTML(it._sugerencia||"—"));
+    const feats=new Set(); items.forEach(i=>i._features.forEach(f=>feats.add(f)));
+    [...feats].sort((a,b)=>a.localeCompare(b)).forEach(f=> add("Caract.: "+f, it=> it._features.includes(f)?"✓":"—") );
+    add("Última actualización", it=>escapeHTML(it.ultima_actualizacion||"—"));
+
+    $$(".remove-col", t).forEach(b=>b.addEventListener("click", e=>{ state.compareIds = state.compareIds.filter(x=>x!==e.currentTarget.dataset.id); renderHubMain(); updateHubCount(); }));
+    return t;
+  }
+
+  /* ========= Eventos ========= */
+  function attachEvents(){
+    $("#searchInput").addEventListener("input", e=>{ state.search=e.target.value; updateUI(); });
+    document.addEventListener("keydown",(e)=>{
+      if(e.key==="/" && !/input|textarea|select/i.test(document.activeElement.tagName)){ e.preventDefault(); $("#searchInput")?.focus(); }
+      if(e.altKey && (e.key==="ArrowRight"||e.key==="ArrowLeft")){
+        e.preventDefault();
+        const list=filteredItems(); const idx=list.findIndex(x=>x.id===state.selectedId);
+        if(idx>-1 && list.length){ const nextIdx = e.key==="ArrowRight" ? (idx+1)%list.length : (idx-1+list.length)%list.length;
+          state.selectedId=list[nextIdx].id; renderPrimary(); highlightQuickList(); }
       }
-      if(!items.length){ const li=document.createElement("li"); li.innerHTML='<span class="chips">Sin resultados</span>'; frag.appendChild(li); }
-      ul.appendChild(frag);
-      $("#status").textContent=`Resultados: ${items.length} · Total: ${state.items.length}`;
-      if(!state.selectedId && items[0]){ state.selectedId=items[0].id; renderPrimary(); highlightQuickList(); }
+      if(e.key==="Escape" && !$("#compareHub").hidden) closeCompareHub();
+      if(e.key.toLowerCase()==="c" && $("#compareHub").hidden) openCompareHub();
+    });
+    $("#hubSearch").addEventListener("input", ()=>renderHub());
+    $("#hubClose").addEventListener("click", closeCompareHub);
+    $("#hubClear").addEventListener("click", ()=>{ state.compareIds=[]; renderHub(); });
+    $("#compareHub").addEventListener("click", (e)=>{ if(e.target.id==="compareHub") closeCompareHub(); });
+  }
+  function updateUI(){ renderQuickList(); renderPrimary(); }
+
+  /* ========= Demo fallback ========= */
+  const SAMPLE_DATA=[
+    { id:"hp-415", marca:"HP", modelo:"Ink Tank 415", nombre:"", tipo:"inyeccion", descripcion_corta:"Multifunción con Wi-Fi para hogar y tareas escolares.", caracteristicas:"Wi-Fi|Imprime/Escanea/Copia|A4|Tanque de tinta", imagenes:"", precio:"149999", moneda:"ARS", url_producto:"", stock:"bajo", uso_recomendado:"estudiante", sugerencia_compra:"", ultima_actualizacion:"2025-08-01" },
+    { id:"epson-l3250", marca:"Epson", modelo:"L3250", nombre:"Epson EcoTank L3250", tipo:"multifunción", descripcion_corta:"EcoTank con impresión económica y conectividad móvil.", caracteristicas:"EcoTank|Wi-Fi|Imprime/Escanea/Copia|A4", imagenes:"", precio:"189999", moneda:"ARS", url_producto:"", stock:"en_stock", uso_recomendado:"hogar", sugerencia_compra:"", ultima_actualizacion:"2025-07-20" },
+    { id:"brother-hl-l2370dw", marca:"Brother", modelo:"HL-L2370DW", nombre:"", tipo:"láser", descripcion_corta:"Láser monocromática rápida con dúplex y Wi-Fi.", caracteristicas:"Láser|Dúplex|Wi-Fi|A4|Monocromo", imagenes:"", precio:"214999", moneda:"ARS", url_producto:"", stock:"sin_stock", uso_recomendado:"oficina", sugerencia_compra:"", ultima_actualizacion:"2025-08-05" },
+  ];
+
+  /* ========= Init ========= */
+  (async function init(){
+    try{
+      const cache=loadCache(); const rows=cache||await loadDataWithFallback();
+      if(!cache) saveCache(rows);
+      const {items,medians}=transformAll(rows);
+      state.items=items; state.medianaPorGrupo=medians;
+      attachEvents(); updateUI();
+    }catch(err){
+      console.error(err);
+      $("#status").textContent="Error al cargar datos";
+      $("#primaryContainer").innerHTML='<div class="chips">Ocurrió un error al obtener los datos.</div>';
     }
-    function highlightQuickList(){ $$("#quickList li").forEach(li=>li.removeAttribute("aria-current")); const cur=$(`#quickList li[data-id="${CSS.escape(state.selectedId)}"]`); if(cur) cur.setAttribute("aria-current","true"); }
-
-    function renderPrimary(){
-      const c=$("#primaryContainer"); c.innerHTML="";
-      const it=state.items.find(x=>x.id===state.selectedId);
-      if(!it){ c.innerHTML='<div class="chips">Selecciona una impresora.</div>'; return; }
-      const node=renderCard(it);
-      c.appendChild(node);
-    }
-
-    function renderCard(item){
-      const tpl=$("#tpl-card"); const el=tpl.content.firstElementChild.cloneNode(true);
-
-      // === Carrusel (slice) ===
-      const stage=el.querySelector(".stage");
-      const imgBottom=el.querySelector(".img-bottom");
-      const prev=el.querySelector(".prev"), next=el.querySelector(".next");
-      const ind=el.querySelector(".indicator");
-      const images=item._images.slice(0,MAX_IMAGES_PER_CARD);
-      let idx=0;
-      const setIndicator=()=> ind.textContent=`${idx+1}/${images.length}`;
-      const setImg=(t,src,alt)=>{ t.src=src; t.alt=alt; };
-      const show=(index)=>{ idx=(index+images.length)%images.length;
-        const src=images[idx]; const alt=`Foto ${idx+1}/${images.length} — ${item.nombre}`;
-        setImg(imgBottom,src,alt); setIndicator();
-      };
-      setImg(imgBottom, images[0], `Foto 1/${images.length} — ${item.nombre}`); setIndicator();
-      prev.addEventListener("click", ()=>show(idx-1)); next.addEventListener("click", ()=>show(idx+1));
-      stage.parentElement.addEventListener("keydown",e=>{ if(e.key==="ArrowLeft"){e.preventDefault();show(idx-1);} if(e.key==="ArrowRight"){e.preventDefault();show(idx+1);} });
-
-      // Chips debajo de la foto
-      el.querySelector(".brand").textContent=item.marca||"—";
-      el.querySelector(".type").textContent=item.tipo||"—";
-      el.querySelector(".stock").textContent=({en_stock:"En stock",bajo:"Stock bajo",sin_stock:"Sin stock",bajo_pedido:"Bajo pedido"}[item.stock]||item.stock||"—");
-      el.querySelector(".price").textContent=item._precio!=null?formatPrice(item._precio,item.moneda):"";
-
-      // Nuevos botones CTA en panel de información
-      const linkBuy = el.querySelector(".cta-buy");
-      const linkView = el.querySelector(".cta-view");
-      if(item.url_producto){ 
-        linkBuy.href=item.url_producto; 
-        linkView.href=item.url_producto; 
-      } else { 
-        linkBuy.href="javascript:void(0)"; 
-        linkView.href="javascript:void(0)"; 
-        linkBuy.classList.add("disabled");
-        linkView.classList.add("disabled");
-      }
-
-      // Datos + features + fecha al final del panel de información
-      el.querySelector(".name").textContent=item.nombre;
-      el.querySelector(".desc").textContent=item.descripcion_corta||"";
-      const feats=el.querySelector(".features"); feats.innerHTML=""; for(const f of item._features){ const li=document.createElement("li"); li.textContent=f; feats.appendChild(li); }
-      el.querySelector(".updated-date").textContent=item.ultima_actualizacion||"—";
-      const sug=el.querySelector(".suggestion"); sug.querySelector(".suggestion-text").textContent=item._sugerencia; sug.querySelector(".suggestion-source").textContent=item._sugerencia_source; sug.title=item._sugerencia_source;
-
-      // Botón comparar - ARREGLADO
-      const compareBtn = el.querySelector(".btn-compare");
-      compareBtn.addEventListener("click", () => openCompareHub());
-
-      return el;
-    }
-
-    /* ========= HUB de comparación ========= */
-    function openCompareHub(){
-      const hub=$("#compareHub"); hub.hidden=false; document.body.style.overflow="hidden";
-      $("#hubSearch").value = state.hubSearch || "";
-      renderHub();
-      setTimeout(()=>$("#hubSearch").focus(),0);
-    }
-    function closeCompareHub(){ $("#compareHub").hidden=true; document.body.style.overflow=""; }
-    function removeFromCompare(id){ state.compareIds = state.compareIds.filter(x=>x!==id); renderHub(); }
-
-    function renderHub(){
-      const q = ($("#hubSearch").value || "").toLowerCase().trim();
-      state.hubSearch = q;
-      const list = $("#hubList"); list.innerHTML="";
-      const items = state.items.filter(it=>{
-        if(!q) return true;
-        const hay=[it.marca,it.modelo,it.nombre,it.tipo,it._features.join(" ")].join(" ").toLowerCase();
-        return hay.includes(q);
-      });
-      const frag=document.createDocumentFragment();
-      for(const it of items){
-        const row=document.createElement("label"); row.className="hub__item"; row.tabIndex=0;
-        const cb=document.createElement("input"); cb.type="checkbox"; cb.value=it.id;
-        const isPrimary = it.id===state.selectedId;
-        cb.checked = isPrimary ? true : state.compareIds.includes(it.id);
-        cb.disabled = isPrimary;
-        cb.addEventListener("change", ()=>{
-          if(cb.checked){ if(!isPrimary){ if(state.compareIds.length >= Math.max(0, MAX_COMPARE_TOTAL-1)){ cb.checked=false; return; } state.compareIds.push(it.id);} }
-          else { state.compareIds = state.compareIds.filter(x=>x!==it.id); }
-          renderHubMain(); updateHubCount();
-        });
-        row.addEventListener("keydown", (e)=>{ if(e.key===" "){ e.preventDefault(); cb.click(); }});
-        const name=document.createElement("span");
-        name.innerHTML = `<strong>${escapeHTML(it.nombre)}</strong> <span class="chip">${escapeHTML(it.marca)}</span>${isPrimary? ' <span class="chip">Seleccionada</span>':''}`;
-        row.appendChild(cb); row.appendChild(name);
-        frag.appendChild(row);
-      }
-      if(!items.length){ const empty=document.createElement("div"); empty.className="hub__item"; empty.innerHTML='<span class="chip">Sin resultados</span>'; frag.appendChild(empty); }
-      list.appendChild(frag);
-      updateHubCount(); renderHubMain();
-    }
-    function renderHubMain(){
-      const wrap=$("#hubTableWrap"); wrap.innerHTML="";
-      const primary=state.items.find(x=>x.id===state.selectedId); if(!primary){ wrap.innerHTML='<div class="pill">Selecciona primero una impresora.</div>'; return; }
-      const cols=[primary, ...state.compareIds.map(id=>state.items.find(x=>x.id===id)).filter(Boolean)];
-      wrap.appendChild(buildCompareTable(cols));
-    }
-    function updateHubCount(){ $("#hubCount").textContent = `${state.compareIds.length} seleccionados (máx. ${Math.max(0, MAX_COMPARE_TOTAL-1)} además del principal)`; }
-
-    function buildCompareTable(items){
-      const t=document.createElement("table"); t.className="compare";
-      const colg=document.createElement("colgroup"); const c0=document.createElement("col"); c0.className="sticky-col"; colg.appendChild(c0);
-      for(let i=0;i<items.length;i++){ const c=document.createElement("col"); c.className="data-col"; colg.appendChild(c); }
-      t.appendChild(colg);
-
-      const thead=t.createTHead(); const hrow=thead.insertRow();
-      const h0=document.createElement("th"); h0.className="sticky"; h0.textContent="Especificación"; hrow.appendChild(h0);
-
-      items.forEach((it,idx)=>{
-        const th=document.createElement("th");
-        if(idx===0) th.classList.add("is-primary-col");
-        th.innerHTML=`<div style="display:grid;gap:6px;align-content:start">
-          <div><strong>${escapeHTML(it.nombre)}</strong></div>
-          <div style="color:var(--muted)">${escapeHTML(it.marca)} ${escapeHTML(it.modelo)}</div>
-          <div style="white-space:nowrap;margin-top:.2rem;display:flex;gap:6px;flex-wrap:wrap">
-            ${it.url_producto?`<a class="btn-cta" href="${it.url_producto}" target="_blank" rel="noopener">Comprar / Ver ficha →</a>`:`<span class="chip">Sin enlace</span>`}
-            ${idx!==0?`<button class="btn btn-ghost remove-col" data-id="${it.id}" type="button">Quitar</button>`:`<span class="chip">Principal</span>`}
-          </div></div>`;
-        hrow.appendChild(th);
-      });
-
-      const tb=t.createTBody();
-      const add=(label,get)=>{const tr=tb.insertRow();const th=document.createElement("th");th.className="sticky";th.textContent=label;tr.appendChild(th);
-        items.forEach((it,idx)=>{const td=tr.insertCell(); td.innerHTML=get(it)??"—"; if(idx===0) td.classList.add("is-primary-col");});
-      };
-      items.forEach(it=>{it._precioFmt=it._precio!=null?formatPrice(it._precio,it.moneda):"—";});
-      add("Nombre", it=>escapeHTML(it.nombre));
-      add("Marca", it=>escapeHTML(it.marca));
-      add("Modelo", it=>escapeHTML(it.modelo));
-      add("Tipo", it=>escapeHTML(it.tipo||"—"));
-      add("Precio", it=>escapeHTML(it._precioFmt));
-      add("Stock", it=>escapeHTML(it.stock||"—"));
-      add("Uso recomendado", it=>escapeHTML(it.uso_recomendado||"—"));
-      add("Sugerencia", it=>escapeHTML(it._sugerencia||"—"));
-      const feats=new Set(); items.forEach(i=>i._features.forEach(f=>feats.add(f)));
-      [...feats].sort((a,b)=>a.localeCompare(b)).forEach(f=> add("Caract.: "+f, it=> it._features.includes(f)?"✓":"—") );
-      add("Última actualización", it=>escapeHTML(it.ultima_actualizacion||"—"));
-
-      $$(".remove-col", t).forEach(b=>b.addEventListener("click", e=>{ state.compareIds = state.compareIds.filter(x=>x!==e.currentTarget.dataset.id); renderHubMain(); updateHubCount(); }));
-      return t;
-    }
-
-    /* ========= Eventos ========= */
-    function attachEvents(){
-      $("#searchInput").addEventListener("input", e=>{ state.search=e.target.value; updateUI(); });
-      document.addEventListener("keydown",(e)=>{
-        if(e.key==="/" && !/input|textarea|select/i.test(document.activeElement.tagName)){ e.preventDefault(); $("#searchInput")?.focus(); }
-        if(e.altKey && (e.key==="ArrowRight"||e.key==="ArrowLeft")){
-          e.preventDefault();
-          const list=filteredItems(); const idx=list.findIndex(x=>x.id===state.selectedId);
-          if(idx>-1 && list.length){ const nextIdx = e.key==="ArrowRight" ? (idx+1)%list.length : (idx-1+list.length)%list.length;
-            state.selectedId=list[nextIdx].id; renderPrimary(); highlightQuickList(); }
-        }
-        if(e.key==="Escape" && !$("#compareHub").hidden) closeCompareHub();
-        if(e.key.toLowerCase()==="c" && $("#compareHub").hidden) openCompareHub();
-      });
-      $("#hubSearch").addEventListener("input", ()=>renderHub());
-      $("#hubClose").addEventListener("click", closeCompareHub);
-      $("#hubClear").addEventListener("click", ()=>{ state.compareIds=[]; renderHub(); });
-      $("#compareHub").addEventListener("click", (e)=>{ if(e.target.id==="compareHub") closeCompareHub(); });
-    }
-    function updateUI(){ renderQuickList(); renderPrimary(); }
-
-    /* ========= Demo fallback ========= */
-    const SAMPLE_DATA=[
-      { id:"hp-415", marca:"HP", modelo:"Ink Tank 415", nombre:"", tipo:"inyeccion", descripcion_corta:"Multifunción con Wi-Fi para hogar y tareas escolares.", caracteristicas:"Wi-Fi|Imprime/Escanea/Copia|A4|Tanque de tinta", imagenes:"", precio:"149999", moneda:"ARS", url_producto:"", stock:"bajo", uso_recomendado:"estudiante", sugerencia_compra:"", ultima_actualizacion:"2025-08-01" },
-      { id:"epson-l3250", marca:"Epson", modelo:"L3250", nombre:"Epson EcoTank L3250", tipo:"multifunción", descripcion_corta:"EcoTank con impresión económica y conectividad móvil.", caracteristicas:"EcoTank|Wi-Fi|Imprime/Escanea/Copia|A4", imagenes:"", precio:"189999", moneda:"ARS", url_producto:"", stock:"en_stock", uso_recomendado:"hogar", sugerencia_compra:"", ultima_actualizacion:"2025-07-20" },
-      { id:"brother-hl-l2370dw", marca:"Brother", modelo:"HL-L2370DW", nombre:"", tipo:"láser", descripcion_corta:"Láser monocromática rápida con dúplex y Wi-Fi.", caracteristicas:"Láser|Dúplex|Wi-Fi|A4|Monocromo", imagenes:"", precio:"214999", moneda:"ARS", url_producto:"", stock:"sin_stock", uso_recomendado:"oficina", sugerencia_compra:"", ultima_actualizacion:"2025-08-05" },
-    ];
-
-    /* ========= Init ========= */
-    (async function init(){
-      try{
-        const cache=loadCache(); const rows=cache||await loadDataWithFallback();
-        if(!cache) saveCache(rows);
-        const {items,medians}=transformAll(rows);
-        state.items=items; state.medianaPorGrupo=medians;
-        attachEvents(); updateUI();
-      }catch(err){
-        console.error(err);
-        $("#status").textContent="Error al cargar datos";
-        $("#primaryContainer").innerHTML='<div class="chips">Ocurrió un error al obtener los datos.</div>';
-      }
-    })();
+  })();
   </script>
 </body>
 </html>
-
-
-
-
